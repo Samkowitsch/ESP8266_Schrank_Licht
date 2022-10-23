@@ -7,7 +7,6 @@
     #include <WiFiUdp.h>
     #include <ESP8266WebServer.h>
     #include <FS.h>
-    #include <WebSocketsServer.h>
     #include <PubSubClient.h>
 
 
@@ -29,7 +28,6 @@
     extern WiFiUDP UDP;
     extern IPAddress timeServerIP;
     extern ESP8266WebServer server;
-    extern WebSocketsServer webSocket;
     extern WiFiClient ESP_Bett_Rechts;
     extern PubSubClient client;
 
@@ -48,8 +46,6 @@
     void connectNTP();
     String getContentType(String filename);
     bool handleFileRead(String path);
-    void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght);
-    void startWebSocket();
     uint32_t getNTPTime();
     byte UnixToSeconds(uint32_t unix);
     byte UnixToMinutes(uint32_t unix);

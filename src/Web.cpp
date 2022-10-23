@@ -30,7 +30,6 @@
 
 
     ESP8266WebServer server(80);
-    WebSocketsServer webSocket(81);
     WiFiClient ESP_Bett_Rechts;
     PubSubClient client(ESP_Bett_Rechts);
 
@@ -107,33 +106,33 @@
 
         String smsg = msg;
 
-
-        if(!strcmp(topic , "Kummer/Licht/Ir/Mode")){
-             uint8_t mode = smsg.toInt();
+        if(!strcmp(topic , "Kummer/Lights/Mode")){
+            t_led_mode mode = (t_led_mode)smsg.toInt();
             setLed_Mode(mode);
         }    
 
-        if(!strcmp(topic , "Kummer/Licht/Ir/RGBW_HEX")){
-            uint32_t hex_val = strtoul(msg , '\0' , 16);
-            RGBW((hex_val & 0xFF000000) >> 24 ,(hex_val & 0x00FF0000) >> 16 , (hex_val & 0x0000FF00) >> 8 , (hex_val & 0x000000FF));
-            client.publish("Kummer/Licht/Bett_Links/RGBW_HEX", msg ,true );
-        }
-
-        if(!strcmp(topic , "Kummer/Licht/Website/RGBW_HEX")){
-            setLed_Mode(1);
-            uint32_t hex_val = strtoul(msg , '\0' , 16);
-            RGBW((hex_val & 0xFF000000) >> 24 ,(hex_val & 0x00FF0000) >> 16 , (hex_val & 0x0000FF00) >> 8 , (hex_val & 0x000000FF));
-        }
-
-        if(!strcmp(topic , "Kummer/Licht/Website/Mode")){
-            uint32_t mode = strtoul(msg , '\0' , 10);
-            setLed_Mode(mode);
-        }
-
-        if(!strcmp(topic , "Kummer/Licht/Website/Brightness")){
-            uint32_t brightness = strtoul(msg , '\0' , 10);
+        if(!strcmp(topic , "Kummer/Lights/Brightness")){
+            uint32_t brightness = strtoul(msg , NULL , 10);
             setBrightnessAbs(brightness);
         }
+        if(!strcmp(topic , "Kummer/Lights/RGBW_HEX")){
+        
+            uint64_t hex_val = strtoul(msg , NULL , 16);
+            RGBW((hex_val & 0xFF000000) >> 24 ,(hex_val & 0x00FF0000) >> 16 , (hex_val & 0x0000FF00) >> 8 , (hex_val & 0x000000FF));
+        }
+
+        // if(!strcmp(topic , "Kummer/Licht/Website/RGBW_HEX")){
+        //     setLed_Mode(1);
+        //     uint32_t hex_val = strtoul(msg , '\0' , 16);
+        //     RGBW((hex_val & 0xFF000000) >> 24 ,(hex_val & 0x00FF0000) >> 16 , (hex_val & 0x0000FF00) >> 8 , (hex_val & 0x000000FF));
+        // }
+
+        // if(!strcmp(topic , "Kummer/Licht/Website/Mode")){
+        //     uint32_t mode = strtoul(msg , '\0' , 10);
+        //     setLed_Mode(mode);
+        // }
+
+
     }
 
 
@@ -153,8 +152,7 @@
 
         if(client.connected()){
             Serial.println("Mqtt Conneced");
-            client.subscribe("Kummer/Licht/Ir/#");
-            client.subscribe("Kummer/Licht/Website/#");
+            client.subscribe("Kummer/Lights/#");
         }
     }
 
@@ -185,55 +183,6 @@
             Serial.println("Sending NTP request..");
             sendNTPpacket(timeServerIP);
         }
-    }
-
-//Get Content Type Webserver------------------------------------------------------------------------
-    String getContentType(String filename) { 
-        if (filename.endsWith(".html")) return "text/html";
-            else if (filename.endsWith(".css")) return "text/css";
-            else if (filename.endsWith(".js")) return "application/javascript";
-            else if (filename.endsWith(".ico")) return "image/x-icon";
-        return "text/plain";
-    }
-
-//Handle File Read Webserver--------------------------------------------------------------------------
-    bool handleFileRead(String path) { // send the right file to the client (if it exists)
-        Serial.println("handleFileRead: " + path);
-        if (path.endsWith("/"))
-            path += "index.html";         // If a folder is requested, send the index file
-        String contentType = getContentType(path);            // Get the MIME type
-        if (SPIFFS.exists(path)) {                            // If the file exists
-            File file = SPIFFS.open(path, "r");                 // Open it
-            size_t sent = server.streamFile(file, contentType); // And send it to the client
-            file.close();                                       // Then close the file again
-            return true;
-        }
-        Serial.println("\tFile Not Found");
-        return false;                                         // If the file doesn't exist, return false
-    }
-
-//Websocket Event-----------------------------------------------------------------------------------------
-    void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t lenght) { // When a WebSocket message is received
-        switch (type) {
-            case WStype_DISCONNECTED:             // if the websocket is disconnected
-                Serial.printf("[%u] Disconnected!\n", num);
-                break;
-            case WStype_CONNECTED:{             // if a new websocket connection is established
-                IPAddress ip = webSocket.remoteIP(num);
-                Serial.printf("[%u] Connected from %d.%d.%d.%d url: %s\n", num, ip[0], ip[1], ip[2], ip[3], payload);
-                }
-                break;
-            case WStype_TEXT: // if new text data is received
-                Serial.printf("[%u] get Text: %s\n", num, payload);
-                break;
-        }
-    }
-
-//Start Websocket----------------------------------------------------------------------------------------------
-    void startWebSocket() { 
-        webSocket.begin();                          // start the websocket server
-        webSocket.onEvent(webSocketEvent);          // if there's an incomming websocket message, go to function 'webSocketEvent'
-        Serial.println("WebSocket server started.");
     }
 
 //Get NTP Time--------------------------------------------------------------------------------------------------

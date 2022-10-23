@@ -6,7 +6,7 @@ uint32_t prev_millis = 0;
 uint8_t BrightnessSetting  = 255;
 uint8_t correctedBrightness ;
 
-uint8_t Led_Mode = 0;
+t_led_mode Led_Mode = LED_OFF;
 uint8_t prev_Led_Mode = 0;
 uint8_t R_Value = 0;
 uint8_t G_Value = 0;
@@ -34,13 +34,13 @@ void setupFastLed(){
     FastLED.setBrightness(BRIGHTNESS);
 }
 
-void send_Mode(uint8_t mode){
+void send_Mode(t_led_mode mode){
 
 }
 
-void setLed_Mode(uint8_t mode){
+void setLed_Mode(t_led_mode mode){
 
-  if(Led_Mode != 0){
+  if(Led_Mode != LED_OFF){
     prev_Led_Mode = Led_Mode;
   }
   Led_Mode = mode; 
@@ -94,9 +94,9 @@ void setBrightnessAbs(uint8_t val){
 
 void ON_OFF(){
   if(on_off){
-    send_Mode(prev_Led_Mode);
+    //send_Mode(prev_Led_Mode);
   } else {
-    send_Mode(0);
+    //send_Mode(0);
   }
 }
 
@@ -104,41 +104,19 @@ void ON_OFF(){
 void ledMode(){
 
   switch (Led_Mode){
-    case 0:
+    case LED_OFF:
       FastLED.clear();
       break;
-    case 1:
+    case LED_HEX:
       RGBW(R_Value,G_Value,B_Value,W_Value);
       break;
-    case 2:
+    case LED_MODE_2:
       break;
-    case 3:
+    case LED_MODE_3:
       break;
-    case 4:
+    case LED_RGB:
       fill_rainbow(leds , NUM_LEDS , startHue , 1);
-      break;
-    case 5:
-      break;
-    case 6:
-      break;
-    case 7:
-      break;
-    case 8:
-      break;
-    case 9:
-      break;
-    case 10:
-      break;
-    case 11:
-      break;
-    case 12:
-      break;
-    case 13:
-      break;
-    case 14:
-      break;
-    case 15:
-      break;  
+      break; 
     default:
       break;
   }
