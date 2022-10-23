@@ -1,0 +1,58 @@
+
+
+:root{
+    --color_1: #493548  ;
+    --color_2: #4B4E6D  ;
+}
+
+
+
+.navBar{
+    position: fixed;
+    top:0;
+
+    background-color: var(--color_1);
+    
+    width: 100%;
+    max-width: 1000px;
+
+    text-align: center;
+
+    margin: 0 auto;
+    left: 0px;
+    right: 0px;
+
+
+}
+
+.navBarItem{
+
+    display: inline-block;
+}
+
+/*Aktives Navbar Item*/
+.active{
+    background-color: #40434E; 
+}
+
+.navBarItem a{
+    float: left;
+    display:block;
+    
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+
+    height: 50px;
+    padding-top: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+
+}
+
+.navBarItem a:hover:not(.active){
+    background-color: var(--color_2) ;
+
+}

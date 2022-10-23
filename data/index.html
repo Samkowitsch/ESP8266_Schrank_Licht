@@ -1,0 +1,99 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name = "Sam Weffling" content = "Led">
+        <meta name="viewport" content="width = device-width, initial-scale=1.0">
+        <title>Led</title>
+        
+        <style type="text/css">
+            @import url(style.css);
+            @import url(colorPicker.css);
+            @import url(navBar.css);
+        </style>
+
+        <script src="javascript.js"></script>
+
+
+    </head>
+
+
+    <body>
+        
+        <ul class="navBar">
+            <li class="navBarItem"><a class="active" href="index.html">Home</a></li>
+            <li class="navBarItem"><a href="http://192.168.178.45">Raspberry</a></li>
+            <li class="navBarItem"><a href="seite3.html">Link 3</a></li>
+        </ul>
+    
+        <!--
+        <p>
+            
+            <div class="dropdown">
+                <button class="dropdownbtn">Mode Dropdown</button>
+                <div class="dropdownContent">
+                    <a href="index.html">Leds An</a>
+                    <a href="index.html">Leds Aus</a>      
+                    <button>Test</button>              
+
+                </div>
+            </div>
+        
+        </p>
+        -->
+        
+        <div class="buttonCenter">
+            <button onclick="Helligkeit(1)" class="ButtonHelligkeit">1</button><button onclick="Helligkeit(2)" class="ButtonHelligkeit">2</button><button onclick="Helligkeit(3)" class="ButtonHelligkeit">3</button><button onclick="Helligkeit(4)" class="ButtonHelligkeit">4</button>
+            
+            <button onclick="Led_Mode(0)" class="standardButton" id="But_Mode_0">Led Aus</button>
+            
+            <div class="ColorPickerDropdown">
+                <button class="RGBButton">RGB</button>
+                <div class="ColorPickerBase">
+                    <div class="colorElement" style="background-color:hsl(0, 100%, 50%);" >1</div>
+                    <div class="colorElement" style="background-color:hsl(80, 100%, 50%);">2</div>
+                    <div class="colorElement" style="background-color:hsl(160, 100%, 50%);">3</div>
+                    <div class="colorElement" style="background-color:hsl(240, 100%, 50%);">4</div>
+                    <div class="colorElement" style="background-color:hsl(320, 100%, 50%);">5</div>
+
+                    <div class="colorElement" style="background-color:hsl(16, 100%, 50%);">6</div>
+                    <div class="colorElement" style="background-color:hsl(96, 100%, 50%)">7</div>
+                    <div class="colorElement" style="background-color:hsl(176, 100%, 50%)">8</div>
+                    <div class="colorElement" style="background-color:hsl(256, 100%, 50%)">9</div>
+                    <div class="colorElement" style="background-color:hsl(336, 100%, 50%)">10</div>
+
+                    <div class="colorElement" style="background-color:hsl(32, 100%, 50%)">11</div>
+                    <div class="colorElement" style="background-color:hsl(112, 100%, 50%)">12</div>
+                    <div class="colorElement" style="background-color:hsl(192, 100%, 50%)">13</div>
+                    <div class="colorElement" style="background-color:hsl(272, 100%, 50%)">14</div>
+                    <div class="colorElement" style="background-color:hsl(360, 100%, 50%)">15</div>
+
+                    <div class="colorElement" style="background-color:hsl(48, 100%, 50%)">16</div>
+                    <div class="colorElement" style="background-color:hsl(128, 100%, 50%)">17</div>
+                    <div class="colorElement" style="background-color:hsl(208, 100%, 50%)">18</div>
+                    <div class="colorElement" style="background-color:hsl(288, 100%, 50%)">19</div>
+                    <div class="colorElement" style="background-color:hsl(0, 100%, 100%)">20</div>
+
+                    <div class="colorElement" style="background-color:hsl(64, 100%, 50%)">21</div>
+                    <div class="colorElement" style="background-color:hsl(144, 100%, 50%)">22</div>
+                    <div class="colorElement" style="background-color:hsl(224, 100%, 50%)">23</div>
+                    <div class="colorElement" style="background-color:hsl(304, 100%, 50%)">24</div>
+                    <div class="colorElement" style="background-color:hsl(64, 100%, 95%)">25</div>
+                </div>
+            </div>
+
+        <!--
+            <button onclick="Led_Mode(2)" class="standardButton" id="But_Mode_2">Wechsel</button>
+            <button onclick="Led_Mode(3)" class="standardButton" id="But_Mode_3">Fade In/Out</button>
+            <button onclick="Led_Mode(4)" class="standardButton" id="But_Mode_4">Fade Wechsel</button>
+            
+            
+            <button class="standardButton" id="but1"></button>
+            -->
+        </div>
+
+
+
+    </body>
+
+</html>

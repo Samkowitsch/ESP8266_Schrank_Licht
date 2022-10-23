@@ -1,0 +1,76 @@
+
+
+.ColorPickerDropdown{
+    
+}
+
+.RGBButton {
+    position: relative;
+    margin: auto;
+    display: block;
+    top: 70px;
+    background-color: var(--color_1);
+    color: white;
+
+    width: 100%;
+    max-width: 1000px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.ColorPickerDropdown:hover .RGBButton{
+    background-color: var(--color_2);
+}
+
+.ColorPickerDropdown:hover .ColorPickerBase{
+   display: flex;
+}
+
+
+.ColorPickerBase{
+    display: none;
+    flex-wrap: wrap;
+
+   justify-content: space-around;
+
+    position: relative;
+    top: 80px;
+    margin: auto;
+    width: 90vw;
+    max-width: 1000px;
+
+    height: 90vw;
+    max-height: 1000px;
+
+    background-color: white;
+    border: white;
+    border-width: 2px;
+    border-style: solid;
+}
+
+
+
+.colorElement {
+
+
+
+    width: 18vw;
+    max-width: 190px;
+    height: 18vw;
+    max-height: 190px;
+
+    box-sizing: border-box;
+    
+    border-style: solid;
+    border-color: white;
+    border-width: 0.1vw;
+    border-radius: 0.5vw;
+
+
+}
+
+.colorElement:hover {
+    border-color: gray;
+}

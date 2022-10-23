@@ -1,0 +1,62 @@
+
+:root{
+    --color_1: #493548  ;
+    --color_2: #4B4E6D  ;
+}
+
+
+body{
+    background-color: #FFFFFA;
+    text-align: center;
+}
+
+
+
+
+.ButtonHelligkeit{
+    position: relative;
+
+    top: 70px;
+    background-color: var(--color_1);
+    color: white;
+    display: inline;
+    width: 25%;
+    max-width: 250px;
+    height: 60px;
+    text-align: center;
+    padding: none;
+    box-sizing: border-box;
+    border: solid;
+    border-color: #40434E;
+    border-width: 1px;
+}
+
+.ButtonHelligkeit:hover {
+    background-color: var(--color_2);
+}
+
+.standardButton {
+    position: relative;
+    margin: auto;
+    display: block;
+    top: 70px;
+    background-color: var(--color_1);
+    color: white;
+
+    width: 100%;
+    max-width: 1000px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.standardButton:hover {
+    background-color: var(--color_2);
+}
+
+.buttonCenter{
+
+    text-align: center;
+ 
+}
